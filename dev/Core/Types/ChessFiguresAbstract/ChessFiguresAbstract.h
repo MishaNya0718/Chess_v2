@@ -13,6 +13,10 @@ public:
 
     ChessColor color() const; //getter
     void setColor(ChessColor newColor); //setter
+    virtual QVector <ChessCoordinate> validMoves() = 0;
+    bool chessMove(ChessCoordinate moveCoordinate);
+
+
 signals:
 
 
