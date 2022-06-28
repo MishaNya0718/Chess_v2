@@ -25,8 +25,8 @@ set(PROJECT_SOURCES
     dev/Core/Core.h
     dev/Core/Types/ChessCoordinate/ChessCoordinate.cpp
     dev/Core/Types/ChessCoordinate/ChessCoordinate.h
-    dev/Core/Types/ChessFiguresAbstract/ChessFiguresAbstract.cpp
-    dev/Core/Types/ChessFiguresAbstract/ChessFiguresAbstract.h
+    dev/Core/Types/ChessFigureAbstract/ChessFigureAbstract.cpp
+    dev/Core/Types/ChessFigureAbstract/ChessFigureAbstract.h
     dev/Core/Types/BaseTypes.h
 )
 
@@ -73,7 +73,7 @@ target_include_directories(${TARGET_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessCoordinate
-    ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFiguresAbstract
+    ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigureAbstract
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/UserInterface
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Resources
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Resources/Pictures

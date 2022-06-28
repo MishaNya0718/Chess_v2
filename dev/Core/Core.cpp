@@ -1,6 +1,6 @@
 #include "Core.h"
 #include <QDebug>
-#include <ChessFiguresAbstract.h>
+#include <ChessFigureAbstract.h>
 
 Core::Core(QObject *parent)
     : QObject{parent}
