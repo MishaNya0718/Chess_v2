@@ -1,4 +1,4 @@
-#include "ChessFiguresAbstract.h"
+#include <ChessFiguresAbstract.h>
 
 ChessFiguresAbstract::ChessFiguresAbstract(QObject *parent)
     : QObject{parent}
@@ -18,7 +18,7 @@ bool ChessFiguresAbstract::chessMove(ChessCoordinate moveCoordinate) {
     bool validMove = false;
     QVector <ChessCoordinate> needValidMoves = validMoves();
     for (int i = 0; i < needValidMoves.count(); i++) {
-        if ((needValidMoves[i].character == moveCoordinate.character) && (needValidMoves[i].number == moveCoordinate.number)) {
+        if ((needValidMoves[i].character() == moveCoordinate.character()) && (needValidMoves[i].number() == moveCoordinate.number())) {
             bool validMove = true;
             m_coordinate = moveCoordinate;
             break;

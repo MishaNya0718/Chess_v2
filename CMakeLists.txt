@@ -10,7 +10,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
@@ -23,6 +23,8 @@ set(PROJECT_SOURCES
     dev/UserInterface/MainWindow.ui
     dev/Core/Core.cpp
     dev/Core/Core.h
+    dev/Core/Types/ChessCoordinate/ChessCoordinate.cpp
+    dev/Core/Types/ChessCoordinate/ChessCoordinate.h
     dev/Core/Types/ChessFiguresAbstract/ChessFiguresAbstract.cpp
     dev/Core/Types/ChessFiguresAbstract/ChessFiguresAbstract.h
     dev/Core/Types/BaseTypes.h
@@ -70,6 +72,7 @@ target_include_directories(${TARGET_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/dev
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types
+    ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessCoordinate
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFiguresAbstract
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/UserInterface
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Resources

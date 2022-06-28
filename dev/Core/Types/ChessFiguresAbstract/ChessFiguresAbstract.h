@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <BaseTypes.h>
+#include <ChessCoordinate.h>
 
 class ChessFiguresAbstract : public QObject
 {
@@ -23,7 +24,7 @@ signals:
 private:
     ChessColor m_color = ChessColor::White;
     ChessType m_type = ChessType::Pawn;
-    ChessCoordinate m_coordinate = ChessCoordinate();
+    ChessCoordinate m_coordinate = ChessCoordinate(ChessCoordinateNumber::Number1, ChessCoordinateCharacter::CharacterA);
     int m_pointValue = 0;
 
 };
