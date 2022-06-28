@@ -10,7 +10,7 @@ class ChessFigureAbstract : public QObject
     Q_OBJECT
 
 public:
-    explicit ChessFigureAbstract(QObject *parent = nullptr);
+    explicit ChessFigureAbstract(ChessCoordinate coordinate, ChessType type, ChessColor color, QObject *parent = nullptr);
 
     ChessColor color() const; //getter
     void setColor(ChessColor newColor); //setter

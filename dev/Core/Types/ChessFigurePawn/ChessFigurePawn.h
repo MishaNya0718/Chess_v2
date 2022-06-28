@@ -2,12 +2,15 @@
 #define CHESSFIGUREPAWN_H
 
 #include <QObject>
+#include <ChessFigureAbstract.h>
 
-class ChessFigurePawn : public QObject
+class ChessFigurePawn final : public ChessFigureAbstract
 {
-    Q_OBJECT
+
 public:
-    explicit ChessFigurePawn(QObject *parent = nullptr);
+    explicit ChessFigurePawn(ChessCoordinate coordinate, ChessColor color, QObject *parent = nullptr);
+
+    QVector <ChessCoordinate> validMoves();
 
 signals:
 

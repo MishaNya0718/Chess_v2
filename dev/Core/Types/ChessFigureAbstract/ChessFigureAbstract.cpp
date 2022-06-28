@@ -1,9 +1,14 @@
 #include <ChessFigureAbstract.h>
+#include <QDebug>
 
-ChessFigureAbstract::ChessFigureAbstract(QObject *parent)
+ChessFigureAbstract::ChessFigureAbstract(ChessCoordinate coordinate, ChessType type, ChessColor color, QObject *parent)
     : QObject{parent}
 {
-
+    m_coordinate = coordinate;
+    m_type = type;
+    m_color = color;
+    qDebug() << "type is" << type;
+    qDebug() << "color is" << color;
 }
 
 ChessColor ChessFigureAbstract::color() const {
