@@ -10,7 +10,7 @@ class ChessFigurePawn final : public ChessFigureAbstract
 public:
     explicit ChessFigurePawn(ChessCoordinate coordinate, ChessColor color, QObject *parent = nullptr);
 
-    QVector <ChessCoordinate> validMoves();
+    QVector <ChessCoordinate> validMoves(QVector<ChessFigureAbstract>* figuresArray);
 
 signals:
 

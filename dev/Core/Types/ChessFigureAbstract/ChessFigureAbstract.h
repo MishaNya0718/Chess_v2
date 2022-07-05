@@ -14,7 +14,7 @@ public:
 
     ChessColor color() const; //getter
     void setColor(ChessColor newColor); //setter
-    virtual QVector <ChessCoordinate> validMoves() = 0;
+    virtual QVector <ChessCoordinate> validMoves(QVector<ChessFigureAbstract>* figuresArray) = 0;
     bool chessMove(ChessCoordinate moveCoordinate);
 
 
@@ -27,14 +27,18 @@ public:
     int pointValue() const;
     void setPointValue(int newPointValue);
 
-signals:
+
+protected:
+    ChessColor m_color = ChessColor::White;
+    ChessCoordinate m_coordinate = ChessCoordinate(ChessCoordinateNumber::Number1, ChessCoordinateCharacter::CharacterA);
 
 
 private:
-    ChessColor m_color = ChessColor::White;
     ChessType m_type = ChessType::Pawn;
-    ChessCoordinate m_coordinate = ChessCoordinate(ChessCoordinateNumber::Number1, ChessCoordinateCharacter::CharacterA);
     int m_pointValue = 0;
+
+
+signals:
 
 };
 
