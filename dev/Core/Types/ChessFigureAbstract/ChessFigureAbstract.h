@@ -14,7 +14,9 @@ public:
 
     ChessColor color() const; //getter
     void setColor(ChessColor newColor); //setter
-    virtual QVector <ChessCoordinate> validMoves(QVector<ChessFigureAbstract>* figuresArray) = 0;
+    virtual QVector <ChessCoordinate> validMoves(QVector<ChessFigureAbstract>* figuresArray) {
+        return QVector <ChessCoordinate>();
+    }
     bool chessMove(ChessCoordinate moveCoordinate, QVector<ChessFigureAbstract>* figuresArray);
 
     ChessType type() const;

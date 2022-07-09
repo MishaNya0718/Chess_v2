@@ -21,6 +21,8 @@ set(PROJECT_SOURCES
     dev/UserInterface/MainWindow.cpp
     dev/UserInterface/MainWindow.h
     dev/UserInterface/MainWindow.ui
+    dev/UserInterface/GameField/GameField.h
+    dev/UserInterface/GameField/GameField.cpp
     dev/Core/Core.cpp
     dev/Core/Core.h
     dev/Core/Types/ChessCoordinate/ChessCoordinate.cpp
@@ -78,6 +80,7 @@ target_include_directories(${TARGET_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigureAbstract
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigurePawn
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/UserInterface
+    ${CMAKE_CURRENT_SOURCE_DIR}/dev/UserInterface/GameField
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Resources
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Resources/Pictures
 )

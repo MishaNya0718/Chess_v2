@@ -47,6 +47,7 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(QVector<ChessFigureAbstract
                     j--;
                 }
             }
+
         }
 
         // Добавление в доступные ходы те клетки, на которые можно рубить
