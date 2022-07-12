@@ -1,4 +1,5 @@
 #include "GameField.h"
+#include <QDebug>
 
 GameField::GameField(QWidget *parent)
     : QWidget{parent}
@@ -11,11 +12,19 @@ void GameField::paintEvent(QPaintEvent *event) {
     int dx;
     int dy;
     int rectSideWidth = 0;
+    int rectX;
+    int rectY;
 
-    if (width() > height())
-        rectSideWidth = height();
-    else
-        rectSideWidth = width();
+    if (width() > height()) {
+        rectSideWidth = height() / 10 * 8;
+        rectX = (width() / 2) - (rectSideWidth / 2);
+        rectY = height() / 10;
+    }
+    else {
+        rectSideWidth = width() / 10 * 8;
+        rectY = (height() / 2) - (rectSideWidth / 2);
+        rectX = width() / 10;
+    }
 
     dx = rectSideWidth / 10;
     dy = rectSideWidth / 10;
@@ -27,7 +36,8 @@ void GameField::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.setPen(QPen(Qt::red, 1, Qt::SolidLine, Qt::RoundCap));
 
-    painter.drawRect(dx, dy, dx * 8, dy * 8);
+    painter.drawRect(rectX, rectY, rectSideWidth, rectSideWidth);
+
 
 
 
