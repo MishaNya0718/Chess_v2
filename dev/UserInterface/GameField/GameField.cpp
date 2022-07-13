@@ -11,23 +11,25 @@ void GameField::paintEvent(QPaintEvent *event) {
     setMinimumSize(500, 500);
     int dx;
     int dy;
-    int rectSideWidth = 0;
+    int sizeBoard = 0;
     int rectX;
     int rectY;
+    int currentX;
+    int currentY;
 
     if (width() > height()) {
-        rectSideWidth = height() / 10 * 8;
-        rectX = (width() / 2) - (rectSideWidth / 2);
+        sizeBoard = height() / 10 * 8;
+        rectX = (width() / 2) - (sizeBoard / 2);
         rectY = height() / 10;
     }
     else {
-        rectSideWidth = width() / 10 * 8;
-        rectY = (height() / 2) - (rectSideWidth / 2);
+        sizeBoard = width() / 10 * 8;
+        rectY = (height() / 2) - (sizeBoard / 2);
         rectX = width() / 10;
     }
 
-    dx = rectSideWidth / 10;
-    dy = rectSideWidth / 10;
+    dx = sizeBoard / 8;
+    dy = sizeBoard / 8;
 
     QVector<char> character = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
     QVector<char> numbers = {'1', '2', '3', '4', '5', '6', '7', '8'};
@@ -36,27 +38,25 @@ void GameField::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.setPen(QPen(Qt::red, 1, Qt::SolidLine, Qt::RoundCap));
 
-    painter.drawRect(rectX, rectY, rectSideWidth, rectSideWidth);
+    //painter.drawRect(rectX, rectY, sizeBoard, sizeBoard);
 
-
-
-
-
-    /*
-    for (int i = 0; i <= 8; i++) {
-        for (int j = 0; j <= 8; j++) {
-        QPoint points[4] = {
-            QPoint(x + 0 * i, y + 0 * j),
-            QPoint(x + 0 * i, y + y * j),
-            QPoint(x + x * i, y + y * j),
-            QPoint(x + x * i, y + 0 * j)
+    for (int i = 1; i < 9; i++) {
+        for (int j = 1; j < 9; j++) {
+        QPoint points[5] = {
+            QPoint(rectX, rectY),
+            QPoint(rectX + dx * i, rectY),
+            QPoint(rectX + dx * i, rectY + dy * j),
+            QPoint(rectX, rectY + dy * j),
+            QPoint(rectX, rectY)
             };
-        painter.drawPolyline(points, 4);
+        painter.drawPolyline(points, 5);
+
         }
     }
 
 
 
+/*
     for (int i = 0; i < 8; i++) {
         painter.setPen(Qt::green);
         QRect rect2(0, y, x, y * i);
