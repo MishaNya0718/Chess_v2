@@ -8,7 +8,7 @@ GameField::GameField(QWidget *parent)
 }
 
 void GameField::paintEvent(QPaintEvent *event) {
-    setMinimumSize(500, 500);
+    setMinimumSize(400, 400);
     int dx;
     int dy;
     int sizeBoard = 0;
@@ -38,59 +38,44 @@ void GameField::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.setPen(QPen(Qt::red, 1, Qt::SolidLine, Qt::RoundCap));
 
-    //painter.drawRect(rectX, rectY, sizeBoard, sizeBoard);
+    painter.drawRect(rectX, rectY, sizeBoard, sizeBoard);
 
-    for (int i = 1; i < 9; i++) {
-        for (int j = 1; j < 9; j++) {
-        QPoint points[5] = {
-            QPoint(rectX, rectY),
-            QPoint(rectX + dx * i, rectY),
-            QPoint(rectX + dx * i, rectY + dy * j),
-            QPoint(rectX, rectY + dy * j),
-            QPoint(rectX, rectY)
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            QPoint points[5] = {
+                QPoint(rectX + dx * i, rectY + dy * j),
+                QPoint(rectX + dx * (i + 1), rectY + dy * j),
+                QPoint(rectX + dx * (i + 1), rectY + dy * (j + 1)),
+                QPoint(rectX + dx * i, rectY + dy * (j + 1)),
+                QPoint(rectX + dx * i, rectY + dy * j)
+
             };
         painter.drawPolyline(points, 5);
-
         }
     }
-
-
-
-/*
     for (int i = 0; i < 8; i++) {
-        painter.setPen(Qt::green);
-        QRect rect2(0, y, x, y * i);
-        painter.drawRect(rect2);
-        painter.drawText(rect2, Qt::AlignCenter, QString(numbers[i]));
-
+        // Верх
         painter.setPen(Qt::blue);
-        QRect rect1(x * i, y * 10, x, -y) ;
+        QRect rect1(rectX + dx * i, rectY, dx, -rectY + (rectY - dy)) ;
         painter.drawRect(rect1);
         painter.drawText(rect1, Qt::AlignCenter, QString(character[i]));
-    }
 
+        // Низ
+        QRect rect2(rectX + dx * i, rectY + sizeBoard + dy, dx, -rectY + (rectY - dy));
+        painter.drawRect(rect2);
+        painter.drawText(rect2, Qt::AlignCenter, QString(character[i]));
 
-*/
-    /*
-    for (int i = 0; i <= 7; i++) {
-    painter.drawText(rect, Qt::AlignCenter, QString(QChar(character[i+1])), &boundingRect);
-    //painter.drawText(x * 2 + 100 * i, y / 2, QString(QChar(character[i])));
-    }
-*/
-    /*
-    for (int i = 0; i <= 7; i++) {
-        painter.drawText(17 * x + 20, (y * 2) + (100 * (7 - i)), QString(QChar(numbers[i])));
-        painter.drawText(x * 2 + 100 * i, y / 2, QString(QChar(character[i])));
-    }
-*/
-/*
-    for (int i = 0; i <= 7; i++){
-        painter.drawText(x / 2, 25 + y + y * i, QString(QChar(numbers[7 - i])));
-        //painter.drawText(x * 2 + x * i, 8 * y + 20, QString(QChar(character[i])));
-        painter.drawText()
+        // Лево
+        QRect rect3(rectX - dx, rectY + dy + dy * i, dx, rectY - (rectY + dy));
+        painter.drawRect(rect3);
+        painter.drawText(rect3, Qt::AlignCenter, QString(numbers[7 - i]));
 
-        painter.drawText(9 * x + 25, 25 + y + y * i, QString(QChar(numbers[7 - i])));
-        //painter.drawText(x * 2 + x * i, 8 * y + 20, QString(QChar(character[i])));
+        // Право
+        QRect rect4(rectX + sizeBoard, rectY + dy + dy * i, dx, rectY - (rectY + dy));
+        painter.drawRect(rect4);
+        painter.drawText(rect4, Qt::AlignCenter, QString(numbers[7 - i]));
     }
-*/
 }
+
+
+
