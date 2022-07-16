@@ -38,21 +38,31 @@ void GameField::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.setPen(QPen(Qt::red, 1, Qt::SolidLine, Qt::RoundCap));
 
-    painter.drawRect(rectX, rectY, sizeBoard, sizeBoard);
+    //painter.drawRect(rectX, rectY, sizeBoard, sizeBoard);
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            QPoint points[5] = {
-                QPoint(rectX + dx * i, rectY + dy * j),
-                QPoint(rectX + dx * (i + 1), rectY + dy * j),
-                QPoint(rectX + dx * (i + 1), rectY + dy * (j + 1)),
-                QPoint(rectX + dx * i, rectY + dy * (j + 1)),
-                QPoint(rectX + dx * i, rectY + dy * j)
 
-            };
-        painter.drawPolyline(points, 5);
+            if (i % 2 == 0) {
+                if (j % 2 == 0)
+                    painter.setBrush(QBrush(Qt::green));
+                else
+                    painter.setBrush(QBrush(Qt::darkYellow));
+            }
+            else {
+                if (j % 2 == 0)
+                    painter.setBrush(QBrush(Qt::darkYellow));
+                else
+                    painter.setBrush(QBrush(Qt::green));
+            }
+
+            QRect rect0(rectX + dx * i, rectY + dy * j, dx, dy);
+            painter.drawRect(rect0);
+            //painter.drawText(rect0, Qt::AlignCenter, QString(character[i]));
         }
     }
+
+    painter.setBrush(QBrush(Qt::lightGray));
     for (int i = 0; i < 8; i++) {
         // Верх
         painter.setPen(Qt::blue);
@@ -78,4 +88,22 @@ void GameField::paintEvent(QPaintEvent *event) {
 }
 
 
+/*
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            QPoint points[5] = {
+                QPoint(rectX + dx * i, rectY + dy * j),
+                QPoint(rectX + dx * (i + 1), rectY + dy * j),
+                QPoint(rectX + dx * (i + 1), rectY + dy * (j + 1)),
+                QPoint(rectX + dx * i, rectY + dy * (j + 1)),
+                QPoint(rectX + dx * i, rectY + dy * j)
 
+            };
+        if (i % 2 == 1)
+            painter.setBrush(QBrush(Qt::green));
+        else
+            painter.setBrush(QBrush(Qt::darkYellow));
+        painter.drawPolyline(points, 5);
+        }
+    }
+*/
