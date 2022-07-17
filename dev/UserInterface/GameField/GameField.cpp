@@ -9,7 +9,7 @@ GameField::GameField(QWidget *parent)
 
 }
 
-void GameField::getParameters(int *dx, int *dy, int *sizeBoard, int *rectX, int *rectY, QVector<char> *character, QVector<char> *numbers) {
+void GameField::getParameters(float *dx, float *dy, float *sizeBoard, float *rectX, float *rectY, QVector<char> *character, QVector<char> *numbers) {
 
     if (width() > height()) {
         *sizeBoard = height() / 10 * 8;
@@ -32,11 +32,11 @@ void GameField::getParameters(int *dx, int *dy, int *sizeBoard, int *rectX, int 
 
 void GameField::paintEvent(QPaintEvent *event) {
 
-    int dx;
-    int dy;
-    int sizeBoard;
-    int rectX;
-    int rectY;
+    float dx;
+    float dy;
+    float sizeBoard;
+    float rectX;
+    float rectY;
     QVector<char> character;
     QVector<char> numbers;
 
@@ -102,21 +102,23 @@ void GameField::paintEvent(QPaintEvent *event) {
 
 void GameField::mousePressEvent(QMouseEvent *event) {
 
-    int dx;
-    int dy;
-    int sizeBoard;
-    int rectX;
-    int rectY;
+    float dx;
+    float dy;
+    float sizeBoard;
+    float rectX;
+    float rectY;
     QVector<char> character;
     QVector<char> numbers;
 
     getParameters(&dx, &dy, &sizeBoard, &rectX, &rectY, &character, &numbers);
 
-    int posX = (event->pos().x() - rectX) / dx;
-    if (0 <= posX && posX <= 7)
-        qDebug() << QString(character[posX]);
+    float posX = (event->pos().x() - rectX) / dx;
+    float posY = (event->pos().y() - rectY) / dy;
+
+    if (0 <= posX && posX < 8 && 0 <= posY && posY < 8) {
+        qDebug() << QString(character[posX]) + " " + QString(numbers[8 - posY]);
+    }
     else
         qDebug() << "Out of size game board";
-    //qDebug() << posX;
 }
 
