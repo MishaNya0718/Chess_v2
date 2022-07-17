@@ -2,7 +2,6 @@
 #define GAMEFIELD_H
 
 #include <QWidget>
-#include <QPainter>
 
 class GameField : public QWidget
 {
@@ -11,7 +10,10 @@ class GameField : public QWidget
 public:
     explicit GameField(QWidget *parent = nullptr);
 
+    void getParameters(int *dx, int *dy, int *sizeBoard, int *rectX, int *rectY, QVector<char> *character, QVector<char> *numbers);
     void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+
 
 protected:
 

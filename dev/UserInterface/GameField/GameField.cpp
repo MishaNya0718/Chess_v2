@@ -1,5 +1,7 @@
 #include "GameField.h"
 #include <QDebug>
+#include <QPainter>
+#include <QMoveEvent>
 
 GameField::GameField(QWidget *parent)
     : QWidget{parent}
@@ -7,32 +9,40 @@ GameField::GameField(QWidget *parent)
 
 }
 
-void GameField::paintEvent(QPaintEvent *event) {
-    setMinimumSize(400, 400);
-    int dx;
-    int dy;
-    int sizeBoard = 0;
-    int rectX;
-    int rectY;
-    int currentX;
-    int currentY;
+void GameField::getParameters(int *dx, int *dy, int *sizeBoard, int *rectX, int *rectY, QVector<char> *character, QVector<char> *numbers) {
 
     if (width() > height()) {
-        sizeBoard = height() / 10 * 8;
-        rectX = (width() / 2) - (sizeBoard / 2);
-        rectY = height() / 10;
+        *sizeBoard = height() / 10 * 8;
+        *rectX = (width() / 2) - (*sizeBoard / 2);
+        *rectY = height() / 10;
     }
     else {
-        sizeBoard = width() / 10 * 8;
-        rectY = (height() / 2) - (sizeBoard / 2);
-        rectX = width() / 10;
+        *sizeBoard = width() / 10 * 8;
+        *rectY = (height() / 2) - (*sizeBoard / 2);
+        *rectX = width() / 10;
     }
 
-    dx = sizeBoard / 8;
-    dy = sizeBoard / 8;
+    *dx = *sizeBoard / 8;
+    *dy = *sizeBoard / 8;
 
-    QVector<char> character = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-    QVector<char> numbers = {'1', '2', '3', '4', '5', '6', '7', '8'};
+    *character = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
+    *numbers = {'1', '2', '3', '4', '5', '6', '7', '8'};
+}
+
+
+void GameField::paintEvent(QPaintEvent *event) {
+
+    int dx;
+    int dy;
+    int sizeBoard;
+    int rectX;
+    int rectY;
+    QVector<char> character;
+    QVector<char> numbers;
+
+    getParameters(&dx, &dy, &sizeBoard, &rectX, &rectY, &character, &numbers);
+
+    setMinimumSize(400, 400);
 
     QPainter painter(this);
     painter.setPen(QPen(Qt::transparent, 1, Qt::SolidLine, Qt::RoundCap));
@@ -88,5 +98,25 @@ void GameField::paintEvent(QPaintEvent *event) {
         painter.drawRect(rect4);
         painter.drawText(rect4, Qt::AlignCenter, QString(numbers[7 - i]));
     }
+}
+
+void GameField::mousePressEvent(QMouseEvent *event) {
+
+    int dx;
+    int dy;
+    int sizeBoard;
+    int rectX;
+    int rectY;
+    QVector<char> character;
+    QVector<char> numbers;
+
+    getParameters(&dx, &dy, &sizeBoard, &rectX, &rectY, &character, &numbers);
+
+    int posX = (event->pos().x() - rectX) / dx;
+    if (0 <= posX && posX <= 7)
+        qDebug() << QString(character[posX]);
+    else
+        qDebug() << "Out of size game board";
+    //qDebug() << posX;
 }
 
