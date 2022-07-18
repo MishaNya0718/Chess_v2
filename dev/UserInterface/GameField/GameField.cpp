@@ -79,7 +79,7 @@ void GameField::paintEvent(QPaintEvent *event) {
     for (int i = 0; i < 8; i++) {
         // Верх
         painter.setPen(Qt::blue);
-        QRect rect1(rectX + dx * i, rectY, dx, -dy) ;
+        QRect rect1(rectX + dx * i, rectY, dx, -dy);
         painter.drawRect(rect1);
         painter.drawText(rect1, Qt::AlignCenter, QString(character[i]));
 
@@ -98,6 +98,14 @@ void GameField::paintEvent(QPaintEvent *event) {
         painter.drawRect(rect4);
         painter.drawText(rect4, Qt::AlignCenter, QString(numbers[7 - i]));
     }
+
+
+    paintImage(ChessCoordinateCharacter::CharacterA, ChessCoordinateNumber::Number4, ChessType::Bishop);
+    paintImage(ChessCoordinateCharacter::CharacterB, ChessCoordinateNumber::Number4, ChessType::King);
+    paintImage(ChessCoordinateCharacter::CharacterC, ChessCoordinateNumber::Number4, ChessType::Knight);
+    paintImage(ChessCoordinateCharacter::CharacterD, ChessCoordinateNumber::Number4, ChessType::Pawn);
+    paintImage(ChessCoordinateCharacter::CharacterE, ChessCoordinateNumber::Number4, ChessType::Queen);
+    paintImage(ChessCoordinateCharacter::CharacterF, ChessCoordinateNumber::Number4, ChessType::Rook);
 }
 
 void GameField::mousePressEvent(QMouseEvent *event) {
@@ -120,5 +128,38 @@ void GameField::mousePressEvent(QMouseEvent *event) {
     }
     else
         qDebug() << "Out of size game board";
+
+}
+
+void GameField::paintImage(ChessCoordinateCharacter character, ChessCoordinateNumber number, ChessType type) {
+    float dx;
+    float dy;
+    float sizeBoard;
+    float rectX;
+    float rectY;
+    QVector<char> characters;
+    QVector<char> numbers;
+
+    getParameters(&dx, &dy, &sizeBoard, &rectX, &rectY, &characters, &numbers);
+
+    QPainter painter(this);
+    painter.setPen(QPen(Qt::transparent, 1, Qt::SolidLine, Qt::RoundCap));
+
+    QImage figureImage;
+
+    switch (type) {
+        case ChessType::Pawn: figureImage = QImage(":/Chess/Pictures/White_Pawn.png"); break;
+        case ChessType::Knight: figureImage = QImage(":/Chess/Pictures/White_Knight.png"); break;
+        case ChessType::Bishop: figureImage = QImage(":/Chess/Pictures/White_Bishop.png"); break;
+        case ChessType::Rook: figureImage = QImage(":/Chess/Pictures/White_Rook.png"); break;
+        case ChessType::Queen: figureImage = QImage(":/Chess/Pictures/White_Queen.png"); break;
+        case ChessType::King: figureImage = QImage(":/Chess/Pictures/White_King.png"); break;
+
+        default: return;
+    }
+
+    //QImage(":/Chess/Pictures/White_Pawn.png");
+    QRect rect1(rectX + (dx * character), rectY + (7 * dy - dy * number), dx, dy);
+    painter.drawImage(rect1, figureImage);
 }
 

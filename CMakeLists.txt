@@ -32,6 +32,7 @@ set(PROJECT_SOURCES
     dev/Core/Types/ChessFigurePawn/ChessFigurePawn.cpp
     dev/Core/Types/ChessFigurePawn/ChessFigurePawn.h
     dev/Core/Types/BaseTypes.h
+    dev/Resources/Images.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

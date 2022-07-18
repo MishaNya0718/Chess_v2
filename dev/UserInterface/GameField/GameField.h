@@ -2,6 +2,7 @@
 #define GAMEFIELD_H
 
 #include <QWidget>
+#include <BaseTypes.h>
 
 class GameField : public QWidget
 {
@@ -15,12 +16,13 @@ public:
     void mousePressEvent(QMouseEvent *event) override;
 
 
+
 protected:
 
 
 
 private:
-
+    void paintImage(ChessCoordinateCharacter x, ChessCoordinateNumber y, ChessType type);
 
 
 signals:
