@@ -22,7 +22,7 @@ protected:
 
 
 private:
-    void paintImage(ChessCoordinateCharacter x, ChessCoordinateNumber y, ChessType type);
+    void paintImage(ChessCoordinateCharacter x, ChessCoordinateNumber y, ChessType type, ChessColor color);
 
 
 signals:

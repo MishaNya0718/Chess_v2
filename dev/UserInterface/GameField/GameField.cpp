@@ -99,13 +99,31 @@ void GameField::paintEvent(QPaintEvent *event) {
         painter.drawText(rect4, Qt::AlignCenter, QString(numbers[7 - i]));
     }
 
+    QVector<ChessType> types = {ChessType::Rook, ChessType::Knight, ChessType::Bishop, ChessType::Queen, ChessType::King, ChessType::Bishop, ChessType::Knight, ChessType::Rook};
 
-    paintImage(ChessCoordinateCharacter::CharacterA, ChessCoordinateNumber::Number4, ChessType::Bishop);
-    paintImage(ChessCoordinateCharacter::CharacterB, ChessCoordinateNumber::Number4, ChessType::King);
-    paintImage(ChessCoordinateCharacter::CharacterC, ChessCoordinateNumber::Number4, ChessType::Knight);
-    paintImage(ChessCoordinateCharacter::CharacterD, ChessCoordinateNumber::Number4, ChessType::Pawn);
-    paintImage(ChessCoordinateCharacter::CharacterE, ChessCoordinateNumber::Number4, ChessType::Queen);
-    paintImage(ChessCoordinateCharacter::CharacterF, ChessCoordinateNumber::Number4, ChessType::Rook);
+    for (int i = 0; i < 8; i++) {
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number2, ChessType::Pawn, ChessColor::White);
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number7, ChessType::Pawn, ChessColor::Black);
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number1, types[i], ChessColor::White);
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number8, types[i], ChessColor::Black);
+    }
+/*
+    for (int i = 0; i < 2 ; i++) {
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i * 7), ChessCoordinateNumber::Number1, ChessType::Rook, ChessColor::White);
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterB + i * 5), ChessCoordinateNumber::Number1, ChessType::Knight, ChessColor::White);
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterC + i * 3), ChessCoordinateNumber::Number1, ChessType::Bishop, ChessColor::White);
+
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i * 7), ChessCoordinateNumber::Number8, ChessType::Rook, ChessColor::Black);
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterB + i * 5), ChessCoordinateNumber::Number8, ChessType::Knight, ChessColor::Black);
+        paintImage(static_cast<ChessCoordinateCharacter>(CharacterC + i * 3), ChessCoordinateNumber::Number8, ChessType::Bishop, ChessColor::Black);
+    }
+
+    paintImage(ChessCoordinateCharacter::CharacterE, ChessCoordinateNumber::Number1, ChessType::King, ChessColor::White);
+    paintImage(ChessCoordinateCharacter::CharacterD, ChessCoordinateNumber::Number1, ChessType::Queen, ChessColor::White);
+
+    paintImage(ChessCoordinateCharacter::CharacterE, ChessCoordinateNumber::Number8, ChessType::King, ChessColor::Black);
+    paintImage(ChessCoordinateCharacter::CharacterD, ChessCoordinateNumber::Number8, ChessType::Queen, ChessColor::Black);
+*/
 }
 
 void GameField::mousePressEvent(QMouseEvent *event) {
@@ -131,7 +149,7 @@ void GameField::mousePressEvent(QMouseEvent *event) {
 
 }
 
-void GameField::paintImage(ChessCoordinateCharacter character, ChessCoordinateNumber number, ChessType type) {
+void GameField::paintImage(ChessCoordinateCharacter character, ChessCoordinateNumber number, ChessType type, ChessColor color) {
     float dx;
     float dy;
     float sizeBoard;
@@ -146,16 +164,29 @@ void GameField::paintImage(ChessCoordinateCharacter character, ChessCoordinateNu
     painter.setPen(QPen(Qt::transparent, 1, Qt::SolidLine, Qt::RoundCap));
 
     QImage figureImage;
+    if (color == ChessColor::White) {
+        switch (type) {
+            case ChessType::Pawn: figureImage = QImage(":/Chess/Pictures/White_Pawn.png"); break;
+            case ChessType::Knight: figureImage = QImage(":/Chess/Pictures/White_Knight.png"); break;
+            case ChessType::Bishop: figureImage = QImage(":/Chess/Pictures/White_Bishop.png"); break;
+            case ChessType::Rook: figureImage = QImage(":/Chess/Pictures/White_Rook.png"); break;
+            case ChessType::Queen: figureImage = QImage(":/Chess/Pictures/White_Queen.png"); break;
+            case ChessType::King: figureImage = QImage(":/Chess/Pictures/White_King.png"); break;
 
-    switch (type) {
-        case ChessType::Pawn: figureImage = QImage(":/Chess/Pictures/White_Pawn.png"); break;
-        case ChessType::Knight: figureImage = QImage(":/Chess/Pictures/White_Knight.png"); break;
-        case ChessType::Bishop: figureImage = QImage(":/Chess/Pictures/White_Bishop.png"); break;
-        case ChessType::Rook: figureImage = QImage(":/Chess/Pictures/White_Rook.png"); break;
-        case ChessType::Queen: figureImage = QImage(":/Chess/Pictures/White_Queen.png"); break;
-        case ChessType::King: figureImage = QImage(":/Chess/Pictures/White_King.png"); break;
+            default: return;
+        }
+    }
+    else {
+        switch (type) {
+            case ChessType::Pawn: figureImage = QImage(":/Chess/Pictures/Black_Pawn.png"); break;
+            case ChessType::Knight: figureImage = QImage(":/Chess/Pictures/Black_Knight.png"); break;
+            case ChessType::Bishop: figureImage = QImage(":/Chess/Pictures/Black_Bishop.png"); break;
+            case ChessType::Rook: figureImage = QImage(":/Chess/Pictures/Black_Rook.png"); break;
+            case ChessType::Queen: figureImage = QImage(":/Chess/Pictures/Black_Queen.png"); break;
+            case ChessType::King: figureImage = QImage(":/Chess/Pictures/Black_King.png"); break;
 
-        default: return;
+            default: return;
+        }
     }
 
     //QImage(":/Chess/Pictures/White_Pawn.png");
