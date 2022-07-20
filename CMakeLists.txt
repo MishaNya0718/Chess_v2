@@ -29,8 +29,20 @@ set(PROJECT_SOURCES
     dev/Core/Types/ChessCoordinate/ChessCoordinate.h
     dev/Core/Types/ChessFigureAbstract/ChessFigureAbstract.cpp
     dev/Core/Types/ChessFigureAbstract/ChessFigureAbstract.h
+
+    dev/Core/Types/ChessFigureBishop/ChessFigureBishop.cpp
+    dev/Core/Types/ChessFigureBishop/ChessFigureBishop.h
+    dev/Core/Types/ChessFigureKing/ChessFigureKing.cpp
+    dev/Core/Types/ChessFigureKing/ChessFigureKing.h
+    dev/Core/Types/ChessFigureKnight/ChessFigureKnight.cpp
+    dev/Core/Types/ChessFigureKnight/ChessFigureKnight.h
     dev/Core/Types/ChessFigurePawn/ChessFigurePawn.cpp
     dev/Core/Types/ChessFigurePawn/ChessFigurePawn.h
+    dev/Core/Types/ChessFigureQueen/ChessFigureQueen.cpp
+    dev/Core/Types/ChessFigureQueen/ChessFigureQueen.h
+
+    dev/Core/Types/ChessFigureRook/ChessFigureRook.cpp
+    dev/Core/Types/ChessFigureRook/ChessFigureRook.h
     dev/Core/Types/BaseTypes.h
     dev/Resources/Images.qrc
 )
@@ -79,7 +91,12 @@ target_include_directories(${TARGET_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessCoordinate
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigureAbstract
+    ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigureBishop
+    ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigureKing
+    ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigureKnight
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigurePawn
+    ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigureQueen
+    ${CMAKE_CURRENT_SOURCE_DIR}/dev/Core/Types/ChessFigureRook
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/UserInterface
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/UserInterface/GameField
     ${CMAKE_CURRENT_SOURCE_DIR}/dev/Resources
