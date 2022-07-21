@@ -2,6 +2,7 @@
 #define CORE_H
 
 #include <QObject>
+#include <ChessFigureAbstract.h>
 
 class Core : public QObject
 {
@@ -9,6 +10,13 @@ class Core : public QObject
 public:
     explicit Core(QObject *parent = nullptr);
     ~Core();
+
+    const QList<ChessFigureAbstract *> &figures() const;
+
+private:
+    QList<ChessFigureAbstract *> m_figures;
+
+
 
 signals:
 

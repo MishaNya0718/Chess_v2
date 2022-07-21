@@ -98,7 +98,7 @@ void GameField::paintEvent(QPaintEvent *event) {
         painter.drawRect(rect4);
         painter.drawText(rect4, Qt::AlignCenter, QString(numbers[7 - i]));
     }
-
+/*
     QVector<ChessType> types = {ChessType::Rook, ChessType::Knight, ChessType::Bishop, ChessType::Queen, ChessType::King, ChessType::Bishop, ChessType::Knight, ChessType::Rook};
 
     for (int i = 0; i < 8; i++) {
@@ -107,23 +107,11 @@ void GameField::paintEvent(QPaintEvent *event) {
         paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number1, types[i], ChessColor::White);
         paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number8, types[i], ChessColor::Black);
     }
-/*
-    for (int i = 0; i < 2 ; i++) {
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i * 7), ChessCoordinateNumber::Number1, ChessType::Rook, ChessColor::White);
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterB + i * 5), ChessCoordinateNumber::Number1, ChessType::Knight, ChessColor::White);
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterC + i * 3), ChessCoordinateNumber::Number1, ChessType::Bishop, ChessColor::White);
-
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i * 7), ChessCoordinateNumber::Number8, ChessType::Rook, ChessColor::Black);
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterB + i * 5), ChessCoordinateNumber::Number8, ChessType::Knight, ChessColor::Black);
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterC + i * 3), ChessCoordinateNumber::Number8, ChessType::Bishop, ChessColor::Black);
+    */
+    for (int i = 0; i < m_core->figures().count(); i++) {
+        ChessFigureAbstract* needFigure = m_core->figures().at(i);
+        paintImage(needFigure->coordinate().character(), needFigure->coordinate().number(), needFigure->type(), needFigure->color());
     }
-
-    paintImage(ChessCoordinateCharacter::CharacterE, ChessCoordinateNumber::Number1, ChessType::King, ChessColor::White);
-    paintImage(ChessCoordinateCharacter::CharacterD, ChessCoordinateNumber::Number1, ChessType::Queen, ChessColor::White);
-
-    paintImage(ChessCoordinateCharacter::CharacterE, ChessCoordinateNumber::Number8, ChessType::King, ChessColor::Black);
-    paintImage(ChessCoordinateCharacter::CharacterD, ChessCoordinateNumber::Number8, ChessType::Queen, ChessColor::Black);
-*/
 }
 
 void GameField::mousePressEvent(QMouseEvent *event) {
@@ -192,5 +180,9 @@ void GameField::paintImage(ChessCoordinateCharacter character, ChessCoordinateNu
     //QImage(":/Chess/Pictures/White_Pawn.png");
     QRect rect1(rectX + (dx * character), rectY + (7 * dy - dy * number), dx, dy);
     painter.drawImage(rect1, figureImage);
+}
+
+void GameField::setCore(Core* newCore) {
+    m_core = newCore;
 }
 

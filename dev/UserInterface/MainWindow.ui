@@ -18,7 +18,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="GameField" name="widget" native="true"/>
+       <widget class="GameField" name="gameField" native="true"/>
       </item>
      </layout>
     </item>

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <BaseTypes.h>
+#include <Core.h>
 
 class GameField : public QWidget
 {
@@ -15,7 +16,7 @@ public:
     void paintEvent(QPaintEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
 
-
+    void setCore(Core* newCore);
 
 protected:
 
@@ -23,7 +24,7 @@ protected:
 
 private:
     void paintImage(ChessCoordinateCharacter x, ChessCoordinateNumber y, ChessType type, ChessColor color);
-
+    Core* m_core;
 
 signals:
 

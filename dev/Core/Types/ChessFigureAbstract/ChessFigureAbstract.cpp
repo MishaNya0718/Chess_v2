@@ -7,8 +7,6 @@ ChessFigureAbstract::ChessFigureAbstract(ChessCoordinate coordinate, ChessType t
     m_coordinate = coordinate;
     m_type = type;
     m_color = color;
-    qDebug() << "type is" << type;
-    qDebug() << "color is" << color;
 }
 
 ChessColor ChessFigureAbstract::color() const {
