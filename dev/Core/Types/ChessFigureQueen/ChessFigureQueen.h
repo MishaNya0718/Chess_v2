@@ -2,12 +2,15 @@
 #define CHESSFIGUREQUEEN_H
 
 #include <QObject>
+#include <ChessFigureAbstract.h>
 
-class ChessFigureQueen : public QObject
+class ChessFigureQueen final : public ChessFigureAbstract
 {
-    Q_OBJECT
+
 public:
-    explicit ChessFigureQueen(QObject *parent = nullptr);
+    explicit ChessFigureQueen(ChessCoordinate coordinate, ChessColor color, QObject *parent = nullptr);
+
+    QVector <ChessCoordinate> validMoves(QVector<ChessFigureAbstract>* figuresArray);
 
 signals:
 

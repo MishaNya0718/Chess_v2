@@ -21,7 +21,7 @@ Core::Core(QObject *parent)
         pawn = new ChessFigurePawn(coordinate, ChessColor::Black, this);
         m_figures.append(dynamic_cast<ChessFigureAbstract *>(pawn));
     }
-/*
+
         ChessCoordinate coordinate = ChessCoordinate(ChessCoordinateNumber::Number1, ChessCoordinateCharacter::CharacterA);
         ChessFigureRook* rook = new ChessFigureRook(coordinate, ChessColor::White, this);
         m_figures.append(dynamic_cast<ChessFigureAbstract *>(rook));
@@ -30,7 +30,7 @@ Core::Core(QObject *parent)
         rook = new ChessFigureRook(coordinate, ChessColor::White, this);
         m_figures.append(dynamic_cast<ChessFigureAbstract *>(rook));
 
-        coordinate = ChessCoordinate(ChessCoordinateNumber::Number1, ChessCoordinateCharacter::CharacterA);
+        coordinate = ChessCoordinate(ChessCoordinateNumber::Number8, ChessCoordinateCharacter::CharacterA);
         rook = new ChessFigureRook(coordinate, ChessColor::Black, this);
         m_figures.append(dynamic_cast<ChessFigureAbstract *>(rook));
 
@@ -49,7 +49,7 @@ Core::Core(QObject *parent)
         m_figures.append(dynamic_cast<ChessFigureAbstract *>(knight));
 
         coordinate = ChessCoordinate(ChessCoordinateNumber::Number8, ChessCoordinateCharacter::CharacterB);
-        ChessFigureKnight* knight = new ChessFigureKnight(coordinate, ChessColor::Black, this);
+        knight = new ChessFigureKnight(coordinate, ChessColor::Black, this);
         m_figures.append(dynamic_cast<ChessFigureAbstract *>(knight));
 
         coordinate = ChessCoordinate(ChessCoordinateNumber::Number8, ChessCoordinateCharacter::CharacterG);
@@ -93,7 +93,7 @@ Core::Core(QObject *parent)
         coordinate = ChessCoordinate(ChessCoordinateNumber::Number8, ChessCoordinateCharacter::CharacterE);
         king = new ChessFigureKing(coordinate, ChessColor::Black, this);
         m_figures.append(dynamic_cast<ChessFigureAbstract *>(king));
-        */
+
 }
 
 const QList<ChessFigureAbstract *> &Core::figures() const

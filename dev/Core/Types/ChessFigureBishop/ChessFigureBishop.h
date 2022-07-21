@@ -2,12 +2,15 @@
 #define CHESSFIGUREBISHOP_H
 
 #include <QObject>
+#include <ChessFigureAbstract.h>
 
-class ChessFigureBishop : public QObject
+class ChessFigureBishop final : public ChessFigureAbstract
 {
-    Q_OBJECT
+
 public:
-    explicit ChessFigureBishop(QObject *parent = nullptr);
+    explicit ChessFigureBishop(ChessCoordinate coordinate, ChessColor color, QObject *parent = nullptr);
+
+    QVector <ChessCoordinate> validMoves(QVector<ChessFigureAbstract>* figuresArray);
 
 signals:
 

@@ -2,12 +2,15 @@
 #define CHESSFIGUREKNIGHT_H
 
 #include <QObject>
+#include <ChessFigureAbstract.h>
 
-class ChessFigureKnight : public QObject
+class ChessFigureKnight final : public ChessFigureAbstract
 {
-    Q_OBJECT
+
 public:
-    explicit ChessFigureKnight(QObject *parent = nullptr);
+    explicit ChessFigureKnight(ChessCoordinate coordinate, ChessColor color, QObject *parent = nullptr);
+
+    QVector <ChessCoordinate> validMoves(QVector<ChessFigureAbstract>* figuresArray);
 
 signals:
 
