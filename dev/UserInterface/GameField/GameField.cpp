@@ -130,11 +130,16 @@ void GameField::mousePressEvent(QMouseEvent *event) {
     float posY = (event->pos().y() - rectY) / dy;
 
     if (0 <= posX && posX < 8 && 0 <= posY && posY < 8) {
-        qDebug() << QString(character[posX]) + " " + QString(numbers[8 - posY]);
+        for (int i = 0; i < m_core->figures().count(); i++) {
+            if (m_core->figures().at(i)->coordinate().character() == (int) posX && m_core->figures().at(i)->coordinate().number() == (int) (8 - posY)) {
+                qDebug() << QString(character[posX]) + " " + QString(numbers[8 - posY]);
+                //qDebug() << m_core->figures().at(i)->coordinate().character();
+                //qDebug() << m_core->figures().at(i)->coordinate().number();
+            }
+        }
     }
     else
         qDebug() << "Out of size game board";
-
 }
 
 void GameField::paintImage(ChessCoordinateCharacter character, ChessCoordinateNumber number, ChessType type, ChessColor color) {
