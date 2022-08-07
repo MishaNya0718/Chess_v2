@@ -41,7 +41,7 @@ void ChessFigureAbstract::setPointValue(int newPointValue) {
     m_pointValue = newPointValue;
 }
 
-bool ChessFigureAbstract::chessMove(ChessCoordinate moveCoordinate, QVector<ChessFigureAbstract>* figuresArray) {
+bool ChessFigureAbstract::chessMove(ChessCoordinate moveCoordinate, QVector<ChessFigureAbstract *>* figuresArray) {
     bool validMove = false;
     QVector <ChessCoordinate> needValidMoves = validMoves(figuresArray);
     for (int i = 0; i < needValidMoves.count(); i++) {

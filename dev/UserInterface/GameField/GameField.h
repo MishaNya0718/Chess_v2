@@ -25,6 +25,14 @@ protected:
 private:
     void paintImage(ChessCoordinateCharacter x, ChessCoordinateNumber y, ChessType type, ChessColor color);
     Core* m_core;
+    bool chessSelectedFlag = false;
+    //ChessCoordinate currentChessCoordinate;
+    ChessCoordinateNumber currentChessCoordinateNumber;
+    ChessCoordinateCharacter currentChessCoordinateCharacter;
+    float posXX;
+    float posYY;
+    int x;
+    int y;
 
 signals:
 

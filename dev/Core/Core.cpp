@@ -96,9 +96,9 @@ Core::Core(QObject *parent)
 
 }
 
-const QList<ChessFigureAbstract *> &Core::figures() const
+const QVector<ChessFigureAbstract *> *Core::figures() const
 {
-    return m_figures;
+    return &m_figures;
 }
 
 Core::~Core()

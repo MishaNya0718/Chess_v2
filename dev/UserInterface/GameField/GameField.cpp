@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QPainter>
 #include <QMoveEvent>
+#include <QVector>
 
 GameField::GameField(QWidget *parent)
     : QWidget{parent}
@@ -42,12 +43,11 @@ void GameField::paintEvent(QPaintEvent *event) {
 
     getParameters(&dx, &dy, &sizeBoard, &rectX, &rectY, &character, &numbers);
 
-    setMinimumSize(400, 400);
+    setMinimumSize(700, 700);
 
+    // Отрисовка игрового поля
     QPainter painter(this);
     painter.setPen(QPen(Qt::transparent, 1, Qt::SolidLine, Qt::RoundCap));
-
-    //painter.drawRect(rectX, rectY, sizeBoard, sizeBoard);
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
@@ -74,7 +74,9 @@ void GameField::paintEvent(QPaintEvent *event) {
             //painter.drawText(rect0, Qt::AlignCenter, QString(character[i]));
         }
     }
+    //---------------------------------------------------------------------------
 
+    // Отрисовка букв и цифр по периметру поля
     painter.setBrush(QColor(154,205,50));
     for (int i = 0; i < 8; i++) {
         // Верх
@@ -98,24 +100,40 @@ void GameField::paintEvent(QPaintEvent *event) {
         painter.drawRect(rect4);
         painter.drawText(rect4, Qt::AlignCenter, QString(numbers[7 - i]));
     }
-/*
-    QVector<ChessType> types = {ChessType::Rook, ChessType::Knight, ChessType::Bishop, ChessType::Queen, ChessType::King, ChessType::Bishop, ChessType::Knight, ChessType::Rook};
+    //---------------------------------------------------------------------------
 
-    for (int i = 0; i < 8; i++) {
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number2, ChessType::Pawn, ChessColor::White);
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number7, ChessType::Pawn, ChessColor::Black);
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number1, types[i], ChessColor::White);
-        paintImage(static_cast<ChessCoordinateCharacter>(CharacterA + i), ChessCoordinateNumber::Number8, types[i], ChessColor::Black);
+    // Отрисовка валидных ходов для фигур
+
+    if (chessSelectedFlag) {
+        painter.setBrush(QColor(120, 120, 120));
+        painter.setPen(Qt::red);
+        for (int i = 0; i < m_core->figures()->count(); i++) {
+            if (m_core->figures()->at(i)->coordinate().character() == currentChessCoordinateCharacter && m_core->figures()->at(i)->coordinate().number() == currentChessCoordinateNumber) {
+                QVector <ChessCoordinate> hodi = m_core->figures()->at(i)->validMoves(m_core->figures());
+                // Подсветить выбранную фигуру
+                painter.drawRect(rectX + currentChessCoordinateCharacter * dx, rectY + (7 - currentChessCoordinateNumber) * dy, dx, dy);
+                for (int j = 0; j < hodi.count(); j++) {
+                    painter.drawRect(rectX + hodi.at(j).character() * dx, rectY + (7 - hodi.at(j).number()) * dy, dx, dy);
+                }
+                break;
+            }
+        }
     }
-    */
-    for (int i = 0; i < m_core->figures().count(); i++) {
-        ChessFigureAbstract* needFigure = m_core->figures().at(i);
+    // Отрисовка стандартного поля, если флаг опущен
+    else {
+
+    }
+    //---------------------------------------------------------------------------
+
+    // Отрисовка фигур на поле
+    for (int i = 0; i < m_core->figures()->count(); i++) {
+        ChessFigureAbstract* needFigure = m_core->figures()->at(i);
         paintImage(needFigure->coordinate().character(), needFigure->coordinate().number(), needFigure->type(), needFigure->color());
     }
+    //---------------------------------------------------------------------------
 }
 
 void GameField::mousePressEvent(QMouseEvent *event) {
-
     float dx;
     float dy;
     float sizeBoard;
@@ -124,22 +142,44 @@ void GameField::mousePressEvent(QMouseEvent *event) {
     QVector<char> character;
     QVector<char> numbers;
 
+
     getParameters(&dx, &dy, &sizeBoard, &rectX, &rectY, &character, &numbers);
 
     float posX = (event->pos().x() - rectX) / dx;
     float posY = (event->pos().y() - rectY) / dy;
 
-    if (0 <= posX && posX < 8 && 0 <= posY && posY < 8) {
-        for (int i = 0; i < m_core->figures().count(); i++) {
-            if (m_core->figures().at(i)->coordinate().character() == (int) posX && m_core->figures().at(i)->coordinate().number() == (int) (8 - posY)) {
-                qDebug() << QString(character[posX]) + " " + QString(numbers[8 - posY]);
-                //qDebug() << m_core->figures().at(i)->coordinate().character();
-                //qDebug() << m_core->figures().at(i)->coordinate().number();
+    posXX = posX;
+    posYY = posY;
+
+    if (event->button() == Qt::LeftButton) {
+        if (0 <= posX && posX < 8 && 0 <= posY && posY < 8) {
+            if (!chessSelectedFlag) {
+                for (int i = 0; i < m_core->figures()->count(); i++) {
+                    if (m_core->figures()->at(i)->coordinate().character() == (int) posX && m_core->figures()->at(i)->coordinate().number() == (int) (8 - posY)) {
+                        qDebug() << "Текущая позиция:" << QString(character[posX]) + " " + QString(numbers[8 - posY]);
+                        QVector <ChessCoordinate> hodi = m_core->figures()->at(i)->validMoves(m_core->figures());
+                        currentChessCoordinateNumber = m_core->figures()->at(i)->coordinate().number();
+                        currentChessCoordinateCharacter = m_core->figures()->at(i)->coordinate().character();
+                        //currentChessCoordinate = m_core->figures()->at(i)->coordinate();
+                        for (int i = 0; i < hodi.count(); i++) {
+                            qDebug() << "Доступный ход:" << QString(character[(hodi.at(i).character())]) << hodi.at(i).number() + 1;
+                        }
+                        qDebug() << "Flag = true";
+                        qDebug() << "\n";
+                        chessSelectedFlag = true;
+                        break;
+                    }
+                }
+            }
+            else {
+                chessSelectedFlag = false;
+                qDebug() << "Flag = false";
+                qDebug() << "currentChessCoordinateCharacter" << "currentChessCoordinateNumber" << "posXX" << "posYY" << "(int)posXX" << "(int)posYY";
+                qDebug() << currentChessCoordinateCharacter << currentChessCoordinateNumber << posXX << posYY << (int)posXX << (int)posYY;
             }
         }
     }
-    else
-        qDebug() << "Out of size game board";
+    update();
 }
 
 void GameField::paintImage(ChessCoordinateCharacter character, ChessCoordinateNumber number, ChessType type, ChessColor color) {
@@ -182,7 +222,6 @@ void GameField::paintImage(ChessCoordinateCharacter character, ChessCoordinateNu
         }
     }
 
-    //QImage(":/Chess/Pictures/White_Pawn.png");
     QRect rect1(rectX + (dx * character), rectY + (7 * dy - dy * number), dx, dy);
     painter.drawImage(rect1, figureImage);
 }

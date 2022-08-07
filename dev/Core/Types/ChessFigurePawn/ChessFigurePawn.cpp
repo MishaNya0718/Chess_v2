@@ -6,7 +6,7 @@ ChessFigurePawn::ChessFigurePawn(ChessCoordinate coordinate, ChessColor color, Q
 
 }
 
-QVector<ChessCoordinate> ChessFigurePawn::validMoves(QVector<ChessFigureAbstract>* figuresArray) {
+QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAbstract *>* figuresArray) {
     QVector<ChessCoordinate> validCoordinatesVector;
     // Описание доступных ходов для белых пешек
     if (m_color == ChessColor::White) {
@@ -29,7 +29,7 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(QVector<ChessFigureAbstract
         // Исключение из доступных ходов те, перед которыми стоит фигура
         for (int i = 0; i < figuresArray->count(); i++) {
 
-            ChessCoordinate figureCoordinate = figuresArray->at(i).coordinate();
+            ChessCoordinate figureCoordinate = figuresArray->at(i)->coordinate();
 
             for (int j = 0; j < validCoordinatesVector.count(); j++) {                
                 if (figureCoordinate == validCoordinatesVector.at(j)) {
@@ -52,7 +52,7 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(QVector<ChessFigureAbstract
         // Добавление в доступные ходы те клетки, на которые можно рубить
         for (int i = 0; i < figuresArray->count(); i++) {
 
-            ChessCoordinate newValidCoordinate = figuresArray->at(i).coordinate();
+            ChessCoordinate newValidCoordinate = figuresArray->at(i)->coordinate();
 
             if (m_coordinate.character() != ChessCoordinateCharacter::CharacterH &&
                     newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1),
@@ -86,7 +86,7 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(QVector<ChessFigureAbstract
         // Исключение из доступных ходов те, перед которыми стоит фигура
         for (int i = 0; i < figuresArray->count(); i++) {
 
-            ChessCoordinate figureCoordinate = figuresArray->at(i).coordinate();
+            ChessCoordinate figureCoordinate = figuresArray->at(i)->coordinate();
 
             for (int j = 0; j < validCoordinatesVector.count(); j++) {
                 if (figureCoordinate == validCoordinatesVector.at(j)) {
@@ -108,7 +108,7 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(QVector<ChessFigureAbstract
         // Добавление в доступные ходы те клетки, на которые можно рубить
         for (int i = 0; i < figuresArray->count(); i++) {
 
-            ChessCoordinate newValidCoordinate = figuresArray->at(i).coordinate();
+            ChessCoordinate newValidCoordinate = figuresArray->at(i)->coordinate();
 
             if (m_coordinate.character() != ChessCoordinateCharacter::CharacterH &&
                     newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1),

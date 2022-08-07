@@ -14,10 +14,10 @@ public:
 
     ChessColor color() const; //getter
     void setColor(ChessColor newColor); //setter
-    virtual QVector <ChessCoordinate> validMoves(QVector<ChessFigureAbstract>* figuresArray) {
+    virtual QVector <ChessCoordinate> validMoves(const QVector<ChessFigureAbstract *>* figuresArray) {
         return QVector <ChessCoordinate>();
     }
-    bool chessMove(ChessCoordinate moveCoordinate, QVector<ChessFigureAbstract>* figuresArray);
+    bool chessMove(ChessCoordinate moveCoordinate, QVector<ChessFigureAbstract *>* figuresArray);
 
     ChessType type() const;
     void setType(ChessType newType);

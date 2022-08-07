@@ -11,10 +11,10 @@ public:
     explicit Core(QObject *parent = nullptr);
     ~Core();
 
-    const QList<ChessFigureAbstract *> &figures() const;
+    const QVector<ChessFigureAbstract *> *figures() const;
 
 private:
-    QList<ChessFigureAbstract *> m_figures;
+    QVector<ChessFigureAbstract *> m_figures;
 
 
 
