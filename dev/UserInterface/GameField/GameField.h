@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <BaseTypes.h>
 #include <Core.h>
+#include <ChessCoordinate.h>
 
 class GameField : public QWidget
 {
@@ -26,13 +27,7 @@ private:
     void paintImage(ChessCoordinateCharacter x, ChessCoordinateNumber y, ChessType type, ChessColor color);
     Core* m_core;
     bool chessSelectedFlag = false;
-    //ChessCoordinate currentChessCoordinate;
-    ChessCoordinateNumber currentChessCoordinateNumber;
-    ChessCoordinateCharacter currentChessCoordinateCharacter;
-    float posXX;
-    float posYY;
-    int x;
-    int y;
+    ChessCoordinate currentChessCoordinate;
 
 signals:
 

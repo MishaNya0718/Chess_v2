@@ -108,10 +108,10 @@ void GameField::paintEvent(QPaintEvent *event) {
         painter.setBrush(QColor(120, 120, 120));
         painter.setPen(Qt::red);
         for (int i = 0; i < m_core->figures()->count(); i++) {
-            if (m_core->figures()->at(i)->coordinate().character() == currentChessCoordinateCharacter && m_core->figures()->at(i)->coordinate().number() == currentChessCoordinateNumber) {
+            if (m_core->figures()->at(i)->coordinate().character() == currentChessCoordinate.character() && m_core->figures()->at(i)->coordinate().number() == currentChessCoordinate.number()) {
                 QVector <ChessCoordinate> hodi = m_core->figures()->at(i)->validMoves(m_core->figures());
                 // Подсветить выбранную фигуру
-                painter.drawRect(rectX + currentChessCoordinateCharacter * dx, rectY + (7 - currentChessCoordinateNumber) * dy, dx, dy);
+                painter.drawRect(rectX + currentChessCoordinate.character() * dx, rectY + (7 - currentChessCoordinate.number()) * dy, dx, dy);
                 for (int j = 0; j < hodi.count(); j++) {
                     painter.drawRect(rectX + hodi.at(j).character() * dx, rectY + (7 - hodi.at(j).number()) * dy, dx, dy);
                 }
@@ -148,9 +148,6 @@ void GameField::mousePressEvent(QMouseEvent *event) {
     float posX = (event->pos().x() - rectX) / dx;
     float posY = (event->pos().y() - rectY) / dy;
 
-    posXX = posX;
-    posYY = posY;
-
     if (event->button() == Qt::LeftButton) {
         if (0 <= posX && posX < 8 && 0 <= posY && posY < 8) {
             if (!chessSelectedFlag) {
@@ -158,9 +155,9 @@ void GameField::mousePressEvent(QMouseEvent *event) {
                     if (m_core->figures()->at(i)->coordinate().character() == (int) posX && m_core->figures()->at(i)->coordinate().number() == (int) (8 - posY)) {
                         qDebug() << "Текущая позиция:" << QString(character[posX]) + " " + QString(numbers[8 - posY]);
                         QVector <ChessCoordinate> hodi = m_core->figures()->at(i)->validMoves(m_core->figures());
-                        currentChessCoordinateNumber = m_core->figures()->at(i)->coordinate().number();
-                        currentChessCoordinateCharacter = m_core->figures()->at(i)->coordinate().character();
-                        //currentChessCoordinate = m_core->figures()->at(i)->coordinate();
+                        //currentChessCoordinateNumber = m_core->figures()->at(i)->coordinate().number();
+                        //currentChessCoordinateCharacter = m_core->figures()->at(i)->coordinate().character();
+                        currentChessCoordinate = m_core->figures()->at(i)->coordinate();
                         for (int i = 0; i < hodi.count(); i++) {
                             qDebug() << "Доступный ход:" << QString(character[(hodi.at(i).character())]) << hodi.at(i).number() + 1;
                         }
@@ -174,8 +171,8 @@ void GameField::mousePressEvent(QMouseEvent *event) {
             else {
                 chessSelectedFlag = false;
                 qDebug() << "Flag = false";
-                qDebug() << "currentChessCoordinateCharacter" << "currentChessCoordinateNumber" << "posXX" << "posYY" << "(int)posXX" << "(int)posYY";
-                qDebug() << currentChessCoordinateCharacter << currentChessCoordinateNumber << posXX << posYY << (int)posXX << (int)posYY;
+
+                qDebug() << currentChessCoordinate.character() << currentChessCoordinate.number();
             }
         }
     }

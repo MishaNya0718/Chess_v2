@@ -2,11 +2,13 @@
 #define CHESSCOORDINATE_H
 
 #include <BaseTypes.h>
+#include <QDataStream>
 
 class ChessCoordinate {
 
 public:
-    ChessCoordinate(ChessCoordinateNumber _number, ChessCoordinateCharacter _character);
+    explicit ChessCoordinate();
+    explicit ChessCoordinate(ChessCoordinateNumber _number, ChessCoordinateCharacter _character);
     bool operator== (const ChessCoordinate &chessCoordinate1);
 
     ChessCoordinateNumber number() const;

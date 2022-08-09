@@ -1,5 +1,10 @@
 #include "ChessCoordinate.h"
 
+ChessCoordinate::ChessCoordinate()
+{
+
+}
+
 ChessCoordinate::ChessCoordinate(ChessCoordinateNumber _number, ChessCoordinateCharacter _character){
     m_number = _number;
     m_character = _character;
