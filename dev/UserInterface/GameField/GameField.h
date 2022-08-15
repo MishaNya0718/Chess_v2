@@ -28,6 +28,7 @@ private:
     Core* m_core;
     bool chessSelectedFlag = false;
     ChessCoordinate currentChessCoordinate;
+    QVector <ChessCoordinate> hodi;
 
 signals:
 

@@ -8,8 +8,9 @@ class ChessCoordinate {
 
 public:
     explicit ChessCoordinate();
-    explicit ChessCoordinate(ChessCoordinateNumber _number, ChessCoordinateCharacter _character);
+    explicit ChessCoordinate(ChessCoordinateCharacter _character, ChessCoordinateNumber _number);
     bool operator== (const ChessCoordinate &chessCoordinate1);
+    ChessCoordinate operator= (const ChessCoordinate &chessCoordinate2);
 
     ChessCoordinateNumber number() const;
     void setNumber(ChessCoordinateNumber newNumber);

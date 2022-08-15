@@ -153,26 +153,36 @@ void GameField::mousePressEvent(QMouseEvent *event) {
             if (!chessSelectedFlag) {
                 for (int i = 0; i < m_core->figures()->count(); i++) {
                     if (m_core->figures()->at(i)->coordinate().character() == (int) posX && m_core->figures()->at(i)->coordinate().number() == (int) (8 - posY)) {
-                        qDebug() << "Текущая позиция:" << QString(character[posX]) + " " + QString(numbers[8 - posY]);
-                        QVector <ChessCoordinate> hodi = m_core->figures()->at(i)->validMoves(m_core->figures());
-                        //currentChessCoordinateNumber = m_core->figures()->at(i)->coordinate().number();
-                        //currentChessCoordinateCharacter = m_core->figures()->at(i)->coordinate().character();
+
+                        hodi = m_core->figures()->at(i)->validMoves(m_core->figures());
                         currentChessCoordinate = m_core->figures()->at(i)->coordinate();
+
+                        qDebug() << "Текущая позиция:" << QString(character[currentChessCoordinate.character()]) + " " + QString(numbers[currentChessCoordinate.number()]);
+
                         for (int i = 0; i < hodi.count(); i++) {
                             qDebug() << "Доступный ход:" << QString(character[(hodi.at(i).character())]) << hodi.at(i).number() + 1;
                         }
                         qDebug() << "Flag = true";
-                        qDebug() << "\n";
                         chessSelectedFlag = true;
                         break;
                     }
                 }
             }
             else {
-                chessSelectedFlag = false;
-                qDebug() << "Flag = false";
-
-                qDebug() << currentChessCoordinate.character() << currentChessCoordinate.number();
+                for (int i = 0; i < m_core->figures()->count(); i++) {
+                    if (currentChessCoordinate == m_core->figures()->at(i)->coordinate()) {
+                        for (int j = 0; j < hodi.count(); j++) {
+                            if (hodi.at(j).character() == (int)posX && hodi.at(j).number() == 7 - (int)posY) {
+                                m_core->figures()->at(i)->setCoordinate(hodi.at(j));
+                                qDebug() << "12 23 1128";
+                                qDebug() << currentChessCoordinate.character() << currentChessCoordinate.number();
+                            }
+                        }
+                        chessSelectedFlag = false;
+                        qDebug() << "Flag = false";
+                        break;
+                    }
+                }
             }
         }
     }

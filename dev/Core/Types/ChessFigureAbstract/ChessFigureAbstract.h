@@ -31,7 +31,7 @@ public:
 
 protected:
     ChessColor m_color = ChessColor::White;
-    ChessCoordinate m_coordinate = ChessCoordinate(ChessCoordinateNumber::Number1, ChessCoordinateCharacter::CharacterA);
+    ChessCoordinate m_coordinate = ChessCoordinate(ChessCoordinateCharacter::CharacterA, ChessCoordinateNumber::Number1);
 
 
 private:

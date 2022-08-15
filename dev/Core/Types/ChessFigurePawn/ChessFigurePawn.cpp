@@ -12,9 +12,9 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAb
     if (m_color == ChessColor::White) {
         // Первый ход белых пешек на одну или две клетки вперед
         if (m_coordinate.number() == ChessCoordinateNumber::Number2) {
-            ChessCoordinate newValidCoordinate = ChessCoordinate(ChessCoordinateNumber::Number3, m_coordinate.character());
+            ChessCoordinate newValidCoordinate = ChessCoordinate(m_coordinate.character(), ChessCoordinateNumber::Number3);
             validCoordinatesVector.append(newValidCoordinate);
-            newValidCoordinate = ChessCoordinate(ChessCoordinateNumber::Number4, m_coordinate.character());
+            newValidCoordinate = ChessCoordinate(m_coordinate.character(), ChessCoordinateNumber::Number4);
             validCoordinatesVector.append(newValidCoordinate);
         }
         // Не первый ход белых пешек на одку клетку вперед
@@ -22,7 +22,7 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAb
             if (m_coordinate.number() == ChessCoordinateNumber::Number8)
                 return std::move(validCoordinatesVector);
 
-            ChessCoordinate newValidCoordinate = ChessCoordinate(static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1), m_coordinate.character());
+            ChessCoordinate newValidCoordinate = ChessCoordinate(m_coordinate.character(), static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1));
             validCoordinatesVector.append(newValidCoordinate);
         }
 
@@ -55,13 +55,13 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAb
             ChessCoordinate newValidCoordinate = figuresArray->at(i)->coordinate();
 
             if (m_coordinate.character() != ChessCoordinateCharacter::CharacterH &&
-                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1),
-                                                  static_cast<ChessCoordinateCharacter>(m_coordinate.character() + 1)))
+                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() + 1),
+                                                          static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1)))
                validCoordinatesVector.append(newValidCoordinate);
 
             if (m_coordinate.character() != ChessCoordinateCharacter::CharacterA  &&
-                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1),
-                                                  static_cast<ChessCoordinateCharacter>(m_coordinate.character() - 1)))
+                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() - 1),
+                                                          static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1)))
                validCoordinatesVector.append(newValidCoordinate);
         }
     }
@@ -70,16 +70,16 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAb
     else {
         // Первый ход черных пешек на одну или две клетки вперед
         if (m_coordinate.number() == ChessCoordinateNumber::Number7) {
-            ChessCoordinate newValidCoordinate = ChessCoordinate(ChessCoordinateNumber::Number6, m_coordinate.character());
+            ChessCoordinate newValidCoordinate = ChessCoordinate(m_coordinate.character(), ChessCoordinateNumber::Number6);
             validCoordinatesVector.append(newValidCoordinate);
-            newValidCoordinate = ChessCoordinate(ChessCoordinateNumber::Number5, m_coordinate.character());
+            newValidCoordinate = ChessCoordinate(m_coordinate.character(), ChessCoordinateNumber::Number5);
             validCoordinatesVector.append(newValidCoordinate);
         }
         else {
             if (m_coordinate.number() == ChessCoordinateNumber::Number1)
                 return std::move(validCoordinatesVector);
 
-            ChessCoordinate newValidCoordinate = ChessCoordinate(static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1), m_coordinate.character());
+            ChessCoordinate newValidCoordinate = ChessCoordinate(m_coordinate.character(), static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1));
             validCoordinatesVector.append(newValidCoordinate);
         }
 
@@ -111,13 +111,13 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAb
             ChessCoordinate newValidCoordinate = figuresArray->at(i)->coordinate();
 
             if (m_coordinate.character() != ChessCoordinateCharacter::CharacterH &&
-                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1),
-                                                  static_cast<ChessCoordinateCharacter>(m_coordinate.character() + 1)))
+                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() + 1),
+                                                          static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1)))
                validCoordinatesVector.append(newValidCoordinate);
 
             if (m_coordinate.character() != ChessCoordinateCharacter::CharacterA  &&
-                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1),
-                                                  static_cast<ChessCoordinateCharacter>(m_coordinate.character() - 1)))
+                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() - 1),
+                                                          static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1)))
                validCoordinatesVector.append(newValidCoordinate);
         }
     }
