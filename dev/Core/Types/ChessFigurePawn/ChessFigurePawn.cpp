@@ -54,15 +54,17 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAb
 
             ChessCoordinate newValidCoordinate = figuresArray->at(i)->coordinate();
 
-            if (m_coordinate.character() != ChessCoordinateCharacter::CharacterH &&
-                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() + 1),
-                                                          static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1)))
-               validCoordinatesVector.append(newValidCoordinate);
+            if (figuresArray->at(i)->color() != ChessColor::White) {
+                if (m_coordinate.character() != ChessCoordinateCharacter::CharacterH &&
+                        newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() + 1),
+                                                              static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1)))
+                        validCoordinatesVector.append(newValidCoordinate);
 
-            if (m_coordinate.character() != ChessCoordinateCharacter::CharacterA  &&
-                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() - 1),
-                                                          static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1)))
-               validCoordinatesVector.append(newValidCoordinate);
+                if (m_coordinate.character() != ChessCoordinateCharacter::CharacterA  &&
+                        newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() - 1),
+                                                              static_cast<ChessCoordinateNumber>(m_coordinate.number() + 1)))
+                        validCoordinatesVector.append(newValidCoordinate);
+            }
         }
     }
 
@@ -110,15 +112,17 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAb
 
             ChessCoordinate newValidCoordinate = figuresArray->at(i)->coordinate();
 
-            if (m_coordinate.character() != ChessCoordinateCharacter::CharacterH &&
-                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() + 1),
-                                                          static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1)))
-               validCoordinatesVector.append(newValidCoordinate);
+            if (figuresArray->at(i)->color() != ChessColor::Black) {
+                if (m_coordinate.character() != ChessCoordinateCharacter::CharacterH &&
+                        newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() + 1),
+                                                              static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1)))
+                   validCoordinatesVector.append(newValidCoordinate);
 
-            if (m_coordinate.character() != ChessCoordinateCharacter::CharacterA  &&
-                    newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() - 1),
-                                                          static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1)))
-               validCoordinatesVector.append(newValidCoordinate);
+                if (m_coordinate.character() != ChessCoordinateCharacter::CharacterA  &&
+                        newValidCoordinate == ChessCoordinate(static_cast<ChessCoordinateCharacter>(m_coordinate.character() - 1),
+                                                              static_cast<ChessCoordinateNumber>(m_coordinate.number() - 1)))
+                   validCoordinatesVector.append(newValidCoordinate);
+            }
         }
     }
 
