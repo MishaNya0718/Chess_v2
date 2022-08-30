@@ -8,14 +8,7 @@ ChessFigureBishop::ChessFigureBishop(ChessCoordinate coordinate, ChessColor colo
 
 QVector<ChessCoordinate> ChessFigureBishop::validMoves(const QVector<ChessFigureAbstract *>* figuresArray) {
     QVector<ChessCoordinate> validCoordinatesVector;
-    int l;
-
-    if (m_coordinate.character() > m_coordinate.number()) {
-        l = m_coordinate.character();
-    }
-    else {
-        l = m_coordinate.number();
-    }
+    int l = 2;
 
     // Добавление доступных ходов для всех слонов
     if (m_coordinate.character() != ChessCoordinateCharacter::CharacterH && m_coordinate.number() != ChessCoordinateNumber::Number8) {

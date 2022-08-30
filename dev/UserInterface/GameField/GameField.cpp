@@ -147,6 +147,8 @@ void GameField::mousePressEvent(QMouseEvent *event) {
 
     float posX = (event->pos().x() - rectX) / dx;
     float posY = (event->pos().y() - rectY) / dy;
+    ChessCoordinate choiceCoordinate(static_cast<ChessCoordinateCharacter>((int) posX), static_cast<ChessCoordinateNumber>((int) (8 - posY)));
+    int removedFigureIndex = -1;
 
     if (event->button() == Qt::LeftButton) {
         if (0 <= posX && posX < 8 && 0 <= posY && posY < 8) {
@@ -154,13 +156,13 @@ void GameField::mousePressEvent(QMouseEvent *event) {
                 for (int i = 0; i < m_core->figures()->count(); i++) {
                     if (m_core->figures()->at(i)->coordinate().character() == (int) posX && m_core->figures()->at(i)->coordinate().number() == (int) (8 - posY)) {
 
-                        hodi = m_core->figures()->at(i)->validMoves(m_core->figures());
+                        QVector <ChessCoordinate> validMoves = m_core->figures()->at(i)->validMoves(m_core->figures());
                         currentChessCoordinate = m_core->figures()->at(i)->coordinate();
 
                         qDebug() << "Текущая позиция:" << QString(character[currentChessCoordinate.character()]) + " " + QString(numbers[currentChessCoordinate.number()]);
 
-                        for (int i = 0; i < hodi.count(); i++) {
-                            qDebug() << "Доступный ход:" << QString(character[(hodi.at(i).character())]) << hodi.at(i).number() + 1;
+                        for (int i = 0; i < validMoves.count(); i++) {
+                            qDebug() << "Доступный ход:" << QString(character[(validMoves.at(i).character())]) << validMoves.at(i).number() + 1;
                         }
 
                         qDebug() << "Flag = true";
@@ -169,6 +171,36 @@ void GameField::mousePressEvent(QMouseEvent *event) {
                     }
                 }
             }
+            else {
+                for (int i = 0; i < m_core->figures()->count(); i++) {
+                    if (currentChessCoordinate == m_core->figures()->at(i)->coordinate()) {
+                        QVector <ChessCoordinate> validMoves = m_core->figures()->at(i)->validMoves(m_core->figures());
+                        for (int j = 0; j < validMoves.count(); j++) {
+                            if (validMoves.at(j).character() == (int)posX && validMoves.at(j).number() == 7 - (int)posY) {
+                                for (int k = 0; k < m_core->figures()->count(); k++) {
+                                    if (m_core->figures()->at(k)->coordinate() == choiceCoordinate) {
+                                        //m_core->removeFigures(k);
+                                        removedFigureIndex = k;
+                                        qDebug() << "Вывод координат фигуры, которую надо удалить" << m_core->figures()->at(k)->coordinate().character() << m_core->figures()->at(k)->coordinate().number();
+                                        break;
+                                    }
+                                }
+                                 m_core->figures()->at(i)->setCoordinate(validMoves.at(j));
+
+                                 if (removedFigureIndex > -1)
+                                    m_core->removeFigures(removedFigureIndex);
+
+                                 break;
+                            }
+                        }
+                        chessSelectedFlag = false;
+                        qDebug() << "Flag = false";
+                        break;
+                    }
+                }
+            }
+
+            /*
             else {
                 for (int i = 0; i < m_core->figures()->count(); i++) {
                     if (currentChessCoordinate == m_core->figures()->at(i)->coordinate()) {
@@ -191,6 +223,7 @@ void GameField::mousePressEvent(QMouseEvent *event) {
                     }
                 }
             }
+            */
         }
     }
     update();

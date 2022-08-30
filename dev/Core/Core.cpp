@@ -103,7 +103,8 @@ const QVector<ChessFigureAbstract *> *Core::figures() const
 
 void Core::removeFigures(int i)
 {
-    delete figures()->at(i);
+    delete m_figures.at(i);
+    m_figures.remove(i);
 }
 
 Core::~Core()

@@ -10,7 +10,10 @@ public:
     explicit ChessCoordinate();
     explicit ChessCoordinate(ChessCoordinateCharacter _character, ChessCoordinateNumber _number);
     bool operator== (const ChessCoordinate &chessCoordinate1);
+
     ChessCoordinate operator= (const ChessCoordinate &chessCoordinate2);
+
+    friend bool operator== (const ChessCoordinate &chessCoordinate1, const ChessCoordinate &chessCoordinate2);
 
     ChessCoordinateNumber number() const;
     void setNumber(ChessCoordinateNumber newNumber);
