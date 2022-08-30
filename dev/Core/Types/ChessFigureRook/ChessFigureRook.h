@@ -10,7 +10,7 @@ class ChessFigureRook final : public ChessFigureAbstract
 public:
     explicit ChessFigureRook(ChessCoordinate coordinate, ChessColor color, QObject *parent = nullptr);
 
-    QVector <ChessCoordinate> validMoves(QVector<ChessFigureAbstract>* figuresArray);
+    QVector <ChessCoordinate> validMoves(const QVector<ChessFigureAbstract *>* figuresArray);
 
 signals:
 

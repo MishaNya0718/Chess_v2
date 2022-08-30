@@ -9,7 +9,11 @@ class Core : public QObject
     Q_OBJECT
 public:
     explicit Core(QObject *parent = nullptr);
+
     ~Core();
+
+    void removeFigures(int i);
+
 
     const QVector<ChessFigureAbstract *> *figures() const;
 

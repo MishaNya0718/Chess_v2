@@ -6,7 +6,7 @@ ChessFigureQueen::ChessFigureQueen(ChessCoordinate coordinate, ChessColor color,
 
 }
 
-QVector<ChessCoordinate> ChessFigureQueen::validMoves(QVector<ChessFigureAbstract>* figuresArray) {
+QVector<ChessCoordinate> ChessFigureQueen::validMoves(const QVector<ChessFigureAbstract *>* figuresArray) {
     QVector<ChessCoordinate> validCoordinatesVector;
     return std::move(validCoordinatesVector);
 }

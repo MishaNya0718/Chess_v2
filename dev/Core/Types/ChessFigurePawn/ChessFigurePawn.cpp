@@ -9,7 +9,7 @@ ChessFigurePawn::ChessFigurePawn(ChessCoordinate coordinate, ChessColor color, Q
 QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAbstract *>* figuresArray) {
     QVector<ChessCoordinate> validCoordinatesVector;
     // Описание доступных ходов для белых пешек
-    if (m_color == ChessColor::White) {
+    if (color() == ChessColor::White) {
         // Первый ход белых пешек на одну или две клетки вперед
         if (m_coordinate.number() == ChessCoordinateNumber::Number2) {
             ChessCoordinate newValidCoordinate = ChessCoordinate(m_coordinate.character(), ChessCoordinateNumber::Number3);
@@ -46,7 +46,6 @@ QVector<ChessCoordinate> ChessFigurePawn::validMoves(const QVector<ChessFigureAb
                     j--;
                 }
             }
-
         }
 
         // Добавление в доступные ходы те клетки, на которые можно рубить

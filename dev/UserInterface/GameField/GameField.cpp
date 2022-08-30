@@ -43,7 +43,7 @@ void GameField::paintEvent(QPaintEvent *event) {
 
     getParameters(&dx, &dy, &sizeBoard, &rectX, &rectY, &character, &numbers);
 
-    setMinimumSize(700, 700);
+    setMinimumSize(400, 400);
 
     // Отрисовка игрового поля
     QPainter painter(this);
@@ -162,6 +162,7 @@ void GameField::mousePressEvent(QMouseEvent *event) {
                         for (int i = 0; i < hodi.count(); i++) {
                             qDebug() << "Доступный ход:" << QString(character[(hodi.at(i).character())]) << hodi.at(i).number() + 1;
                         }
+
                         qDebug() << "Flag = true";
                         chessSelectedFlag = true;
                         break;
@@ -173,9 +174,15 @@ void GameField::mousePressEvent(QMouseEvent *event) {
                     if (currentChessCoordinate == m_core->figures()->at(i)->coordinate()) {
                         for (int j = 0; j < hodi.count(); j++) {
                             if (hodi.at(j).character() == (int)posX && hodi.at(j).number() == 7 - (int)posY) {
+                                for (int k = 0; k < m_core->figures()->count(); k++) {
+                                    if (m_core->figures()->at(k)->coordinate().character() == hodi.at(j).character() &&
+                                            m_core->figures()->at(k)->coordinate().number() == hodi.at(j).number()) {
+                                        //m_core->removeFigures(k);
+                                        qDebug() << "Вывод координат фигуры, которую надо удалить" << m_core->figures()->at(k)->coordinate().character() << m_core->figures()->at(k)->coordinate().number();
+                                        break;
+                                    }
+                                }
                                 m_core->figures()->at(i)->setCoordinate(hodi.at(j));
-                                qDebug() << "12 23 1128";
-                                qDebug() << currentChessCoordinate.character() << currentChessCoordinate.number();
                             }
                         }
                         chessSelectedFlag = false;

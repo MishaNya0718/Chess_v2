@@ -101,6 +101,11 @@ const QVector<ChessFigureAbstract *> *Core::figures() const
     return &m_figures;
 }
 
+void Core::removeFigures(int i)
+{
+    delete figures()->at(i);
+}
+
 Core::~Core()
 {
     qDebug() << "Ядро удалено!!!";
